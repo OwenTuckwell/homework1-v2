@@ -103,12 +103,18 @@ Bathroom frequency table for properties in Newington:
 ## EXERCISE 4
 
 ```{r hw1-ex4}
-# remove this comment and add the code for Exercise 4 here
-
+# 
+council$assessment_date <- as.Date(council$assessment_date, format = "%Y-%m-%d")
+properties_in_may <- sum(month(council$assessment_date) == 5)
+cat("Number of properties assessed in the month of May:", properties_in_may, "\n")
+problematic_rows <- which(is.na(as.Date(council$assessment_date, format = "%Y-%m-%d")))
+council <- council[!is.na(council$assessment_date), ]
+properties_in_may <- sum(month(council$assessment_date) == 5)
+cat("Number of properties assessed in the month of May:", properties_in_may, "\n")
 ```
 
 
-_Remove this text, and add your answer for Exercise 4 here._
+At first I got "NA" as my answer so I removed any rows with missing or invalid date values and tried again. The number of properties assessed in the month of may: 0
 
 
 ------------------------------------------------------------------------------
