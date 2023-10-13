@@ -33,8 +33,8 @@ missing_values <- colSums(is.na(edibnb))
 print(names(missing_values[missing_values > 0]))
 
 perfect_reviews <- edibnb[edibnb$review_scores_rating == 100, ]
-listing_with_highest_perfect_reviews <- perfect_reviews$id[which.max(table(perfect_reviews$id))]
-print(listing_with_highest_perfect_reviews)
+  listing_with_highest_perfect_reviews <- perfect_reviews$id[which.max(table(perfect_reviews$id))]
+  print(listing_with_highest_perfect_reviews)
 
 
 ```
@@ -57,18 +57,18 @@ ID of the listing that has the highest number of reviews with a perfect review s
 ```{r hw1-ex2}
 # 
 old_town_properties <- filter(edibnb, neighbourhood == "Old Town")
-expensive_properties <-   filter(old_town_properties, price > 100)
-num_properties <- nrow(expensive_properties)
-cat("Number of Airbnb properties in Old Town with one-night price > 100 GBP:", num_properties)
+  expensive_properties <-   filter(old_town_properties, price > 100)
+  num_properties <- nrow(expensive_properties)
+  cat("Number of Airbnb properties in Old Town with one-night price > 100 GBP:", num_properties)
 
 southside_properties <- subset(edibnb, neighbourhood == "Southside" & accommodates >= 4)
-valid_price_properties <- southside_properties[!is.na(southside_properties$price), ]
-min_price <- min(valid_price_properties$price)
-max_price <- max(valid_price_properties$price)
-avg_price <- mean(valid_price_properties$price)
-cat("Minimum price for a single night stay for four or more people in Southside:", min_price, "GBP\n")
-cat("Maximum price for a single night stay for four or more people in Southside:", max_price, "GBP\n")
-cat("Average price for a single night stay for four or more people in Southside:", avg_price, "GBP\n")
+  valid_price_properties <- southside_properties[!is.na(southside_properties$price), ]
+  min_price <- min(valid_price_properties$price)
+  max_price <- max(valid_price_properties$price)
+  avg_price <- mean(valid_price_properties$price)
+  cat("Minimum price for a single night stay for four or more people in Southside:", min_price, "GBP\n")
+  cat("Maximum price for a single night stay for four or more people in Southside:", max_price, "GBP\n")
+  cat("Average price for a single night stay for four or more people in Southside:", avg_price, "GBP\n")
 
 ```
 
@@ -88,8 +88,8 @@ Average price for a single night stay for four or more people in Southside: 153.
 ```{r hw1-ex3}
 # 
 newington_properties <- subset(edibnb, neighbourhood == "Newington")
-bathroom_freq_table <- table(newington_properties$bathrooms)
-print(bathroom_freq_table)
+  bathroom_freq_table <- table(newington_properties$bathrooms)
+  print(bathroom_freq_table)
 
 ```
 
@@ -115,12 +115,12 @@ However it was refusing to knit, possibly an issue with my R studios.
 ```{r hw1-ex4}
 # 
 council$assessment_date <- as.Date(council$assessment_date, format = "%Y-%m-%d")
-properties_in_may <- sum(month(council$assessment_date) == 5)
-cat("Number of properties assessed in the month of May:", properties_in_may, "\n")
-problematic_rows <- which(is.na(as.Date(council$assessment_date, format = "%Y-%m-%d")))
-council <- council[!is.na(council$assessment_date), ]
-properties_in_may <- sum(month(council$assessment_date) == 5)
-cat("Number of properties assessed in the month of May:", properties_in_may, "\n")
+  properties_in_may <- sum(month(council$assessment_date) == 5)
+  cat("Number of properties assessed in the month of May:", properties_in_may, "\n")
+  problematic_rows <- which(is.na(as.Date(council$assessment_date, format = "%Y-%m-%d")))
+  council <- council[!is.na(council$assessment_date), ]
+  properties_in_may <-   sum(month(council$assessment_date) == 5)
+  cat("Number of properties assessed in the month of May:", properties_in_may, "\n")
 
 
 ```
