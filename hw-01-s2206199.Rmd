@@ -1,0 +1,111 @@
+---
+title: "hw-01"
+author: "Your Name (S2206199)"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}    
+knitr::opts_chunk$set(out.width = "100%")
+```
+
+
+------------------------------------------------------------------------------
+
+### Load packages and data
+
+```{r load-packages, message=FALSE}
+library(tidyverse)
+library(lubridate)
+
+edibnb <- read_csv("data/edibnb.csv")
+council <- read_csv("data/council_assessments.csv")
+```
+
+------------------------------------------------------------------------------
+
+
+## EXERCISE 1
+
+```{r hw1-ex1}
+# 
+missing_values <- colSums(is.na(edibnb))
+print(names(missing_values[missing_values > 0]))
+
+perfect_reviews <- edibnb[edibnb$review_scores_rating == 100, ]
+listing_with_highest_perfect_reviews <- perfect_reviews$id[which.max(table(perfect_reviews$id))]
+print(listing_with_highest_perfect_reviews)
+
+
+```
+
+The variables which have the missing observations, i.e. NAs as an entry are: 
+[1] "price"               
+[2] "neighbourhood"       
+[3] "bathrooms"           
+[4] "bedrooms"            
+[5] "beds"                
+[6] "review_scores_rating"
+
+ID of the listing that has the highest number of reviews with a perfect review score of 100% is: 51505
+
+
+------------------------------------------------------------------------------
+
+## EXERCISE 2
+
+```{r hw1-ex2}
+# 
+old_town_properties <- filter(edibnb, neighbourhood == "Old Town")
+expensive_properties <-   filter(old_town_properties, price > 100)
+num_properties <- nrow(expensive_properties)
+cat("Number of Airbnb properties in Old Town with one-night price > 100 GBP:", num_properties)
+
+southside_properties <- subset(edibnb, neighbourhood == "Southside" & accommodates >= 4)
+valid_price_properties <- southside_properties[!is.na(southside_properties$price), ]
+min_price <- min(valid_price_properties$price)
+max_price <- max(valid_price_properties$price)
+avg_price <- mean(valid_price_properties$price)
+cat("Minimum price for a single night stay for four or more people in Southside:", min_price, "GBP\n")
+cat("Maximum price for a single night stay for four or more people in Southside:", max_price, "GBP\n")
+cat("Average price for a single night stay for four or more people in Southside:", avg_price, "GBP\n")
+
+```
+
+
+Number of Airbnb properties in Old Town with one-night price > 100 GBP: 494
+
+Minimum price for a single night stay for four or more people in Southside: 10 GBP
+
+Maximum price for a single night stay for four or more people in Southside: 800 GBP
+
+Average price for a single night stay for four or more people in Southside: 153.1368 GBP
+
+------------------------------------------------------------------------------
+
+## EXERCISE 3
+
+```{r hw1-ex3}
+# remove this comment and add the code for Exercise 3 here
+
+```
+
+
+_Remove this text, and add your answer for Exercise 3 here._
+
+
+
+------------------------------------------------------------------------------
+
+## EXERCISE 4
+
+```{r hw1-ex4}
+# remove this comment and add the code for Exercise 4 here
+
+```
+
+
+_Remove this text, and add your answer for Exercise 4 here._
+
+
+------------------------------------------------------------------------------
