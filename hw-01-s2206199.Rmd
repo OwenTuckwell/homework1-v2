@@ -86,13 +86,27 @@ Average price for a single night stay for four or more people in Southside: 153.
 ## EXERCISE 3
 
 ```{r hw1-ex3}
-# remove this comment and add the code for Exercise 3 here
+# 
+newington_properties <- subset(edibnb, neighbourhood == "Newington")
+bathroom_freq_table <- table(newington_properties$bathrooms)
+print(bathroom_freq_table)
+
+edibnb <- edibnb %>%
++     mutate(bathrooms_rounded = ceiling(bathrooms))
+listings_with_more_bathrooms <- edibnb %>%
++     filter(bathrooms_rounded > bedrooms)
+count_listings_with_more_bathrooms <- nrow(listings_with_more_bathrooms)
+cat("Number of listings with more bathrooms than bedrooms:", count_listings_with_more_bathrooms, "\n")
+
 
 ```
 
 
-_Remove this text, and add your answer for Exercise 3 here._
+Bathroom frequency table for properties in Newington: 
+0 0.5   1 1.5   2   3 3.5 
+1   3 348  48  34   3   1 
 
+Number of listings with more bathrooms than bedrooms: 963 
 
 
 ------------------------------------------------------------------------------
