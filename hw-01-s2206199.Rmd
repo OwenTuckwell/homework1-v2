@@ -98,6 +98,16 @@ Bathroom frequency table for properties in Newington:
 0 0.5   1 1.5   2   3 3.5 
 1   3 348  48  34   3   1 
 
+This is the code I entered for part 2 of this: 
+edibnb <- edibnb %>%
++     mutate(bathrooms_rounded = ceiling(bathrooms))
+listings_with_more_bathrooms <- edibnb %>%
++     filter(bathrooms_rounded > bedrooms)
+count_listings_with_more_bathrooms <- nrow(listings_with_more_bathrooms)
+cat("Number of listings with more bathrooms than bedrooms:", count_listings_with_more_bathrooms, "\n")
+
+However it was refusing to knit, possibly an issue with my R studios.
+
 ------------------------------------------------------------------------------
 
 ## EXERCISE 4
@@ -111,10 +121,31 @@ problematic_rows <- which(is.na(as.Date(council$assessment_date, format = "%Y-%m
 council <- council[!is.na(council$assessment_date), ]
 properties_in_may <- sum(month(council$assessment_date) == 5)
 cat("Number of properties assessed in the month of May:", properties_in_may, "\n")
+
+
 ```
 
 
 At first I got "NA" as my answer so I removed any rows with missing or invalid date values and tried again. The number of properties assessed in the month of may: 0
 
+The bar chart I produced seems to be blank... I think since I also got 2 for may I've screwed something up somewhere, I'm not sure what why or how though and its 14:30!
+
+This is the code I generated the bar chart with:
+library(dplyr)
+library(ggplot2)
+assessed_properties <- merged_data %>%
++     filter(!is.na(assessment_date))
+neighbourhood_counts <- assessed_properties %>%
++     group_by(neighbourhood) %>%
++     summarise(property_count = n())
+ggplot(neighbourhood_counts, aes(x = neighbourhood, y = property_count)) +
++     geom_bar(stat = "identity", fill = "blue") +
++     xlab("Neighbourhood") +
++     ylab("Number of Assessed Properties") +
++     ggtitle("Assessed Properties by Neighbourhood") +
++     theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+However it was refusing to knit, again.
+Sorry.
 
 ------------------------------------------------------------------------------
